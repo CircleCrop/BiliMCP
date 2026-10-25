@@ -1,0 +1,19 @@
+Bilibili 互联
+Copyright (C) 2026 crop
+SPDX-License-Identifier: GPL-3.0-or-later
+
+This project is distributed under the GNU General Public License, version 3
+or any later version. See LICENSE for the complete license text.
+
+The Bilibili API transport, WBI/WBI2 signing and Web credential-refresh flows
+were developed with reference to the archived bilibili-api-python project.
+Its package metadata identifies GPL-3.0-or-later and credits Nemo2011,
+MoyuScript and other bilibili-api contributors. This project retains that
+source attribution. The reference archive is not included in this release.
+
+Bilibili endpoint documentation was also consulted from bilibili-API-collect,
+credited to SocialSisterYi and upstream contributors and qianxuntudou-ops.
+That documentation identifies CC-BY-NC-4.0. Its documents, images and protocol
+source files are not included in this release.
+
+Runtime dependencies retain their own licenses. See docs/dependencies.md.

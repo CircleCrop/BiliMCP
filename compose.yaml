@@ -1,0 +1,38 @@
+name: bilimcp
+services:
+  bilimcp:
+    build: .
+    image: bilimcp:1.0
+    restart: unless-stopped
+    environment:
+      FXBILIBILI_HOST: 0.0.0.0
+      FXBILIBILI_PORT: "8000"
+      FXBILIBILI_CREDENTIALS_FILE: /credentials/credentials.json
+      FXBILIBILI_QR_CODE_FILE: /credentials/login-qr.png
+      FXBILIBILI_HISTORY_FILE: /data/public-history.sqlite3
+      FXBILIBILI_VIDEO_CACHE_FILE: /data/video-media.sqlite3
+      FXBILIBILI_DEBUG_LOG_HTTP: "false"
+      FXBILIBILI_UPSTREAM_CONCURRENCY: ${FXBILIBILI_UPSTREAM_CONCURRENCY:-3}
+      FXBILIBILI_UPSTREAM_REQUESTS_PER_CALL: ${FXBILIBILI_UPSTREAM_REQUESTS_PER_CALL:-64}
+      FXBILIBILI_UPSTREAM_REQUESTS_PER_MINUTE: ${FXBILIBILI_UPSTREAM_REQUESTS_PER_MINUTE:-0}
+      FXBILIBILI_UPSTREAM_SPACING_SECONDS: ${FXBILIBILI_UPSTREAM_SPACING_SECONDS:-0.1}
+      FXBILIBILI_CACHE_MAX_BYTES: ${FXBILIBILI_CACHE_MAX_BYTES:-268435456}
+      FXBILIBILI_HISTORY_MAX_BYTES: ${FXBILIBILI_HISTORY_MAX_BYTES:-4294967296}
+      FXBILIBILI_VIDEO_CACHE_MAX_BYTES: ${FXBILIBILI_VIDEO_CACHE_MAX_BYTES:-21474836480}
+    ports:
+      - "127.0.0.1:${BILIMCP_PORT:-8000}:8000"
+    volumes:
+      - credentials:/credentials
+      - data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 2g
+    pids_limit: 128
+    logging:
+      options: {max-size: 10m, max-file: "3"}
+volumes:
+  credentials:
+  data:
